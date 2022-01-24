@@ -4,9 +4,13 @@ import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { icon, Marker } from 'leaflet';
 
+
 export const DEFAULT_LAT = 48.20807;
 export const DEFAULT_LON =  16.37320;
 export const TITULO = 'Proyecto';
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +33,18 @@ export class AppComponent  implements OnInit {
 
 
   private initMap(): void {
+    var iconDefault = L.icon({
+      iconRetinaUrl,
+      iconUrl,
+      shadowUrl,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      tooltipAnchor: [16, -28],
+      shadowSize: [41, 41]
+    });
+    L.Marker.prototype.options.icon = iconDefault;
+
     //configuración del mapa
     this.map = L.map('map', {
       center: [this.lat, this.lon],
